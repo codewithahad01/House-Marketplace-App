@@ -7,8 +7,11 @@ import React from 'react'
 function SignIn() {
     const [showPassword, setPassword] = useState(false)
     const [formData, setFormData] = useState({
-        email: ''
+        email: '',
+        password: ''
     })
+    const {email, password} = formData
+    const navigate = useNavigate()
 
     return (
         <div>SignIn</div>
