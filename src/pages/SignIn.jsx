@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import {Link, useNavigate} from 'react-router-dom'
-import {ReactComponent as ArrowRight} from '../assets/svg/keyboardArrowRightIcon.svg' 
+import {ReactComponent as ArrowRightIcon} from '../assets/svg/keyboardArrowRightIcon.svg' 
 import visibilityIcon from '../assets/svg/visibilityIcon.svg'
 import React from 'react'
 
@@ -13,8 +13,11 @@ function SignIn() {
     const {email, password} = formData
     const navigate = useNavigate()
 
-    const onChange = () => {
-        setFormData({...formData, [email.target.name]: password.target.value})
+    const onChange = (e) => {
+        setFormData((prevState) => ({
+            ...prevState,
+            [e.target.id]: e.target.value
+        }))
     }
 
     return (
@@ -25,9 +28,10 @@ function SignIn() {
                         Welcome Back!
                     </p>
                 </header>
+
                     <form>
                         <input type='email' className='emailInput' placeholder='Email' id='email' value={email} onChange={onChange} />
-                        <div className='passwordInputDev'>
+                        <div className='passwordInputDiv'>
                             <input type={showPassword ? 'text' : 'password'} className='passwordInput' placeholder='Password' id='password'
                             value={password} onChange={onChange} />
                             <img src={visibilityIcon} alt="show password" className='showPassword'
@@ -42,7 +46,7 @@ function SignIn() {
                                 Sign In
                             </p>
                             <button className='signInButton'>
-                                <ArrowRight fill='#ffffff' width={34} height={34} />
+                                <ArrowRightIcon fill='#ffffff' width={34} height={34} />
                             </button>
                         </div>
                     </form>
