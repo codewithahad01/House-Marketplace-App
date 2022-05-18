@@ -5,6 +5,7 @@ import {collection, getDocs, query, where, orderBy, limit} from 'firebase/firest
 import {db} from '../firebase.config'
 import { toast } from 'react-toastify'
 import Spinner from '../components/Spinner'
+import ListingItem from '../components/ListingItem'
 
 export default function Category() {
     const [listings, setListings] = useState(null)
@@ -51,22 +52,40 @@ export default function Category() {
         fetchListings()
     }, [params.categoryName])
 
+
+
     return (
+        
         <div className='category'>
             <header>
                 <p className='pageHeader'>
-                    {params.CategoryName === 'rent' ? 'Places for rent' : 'Places to sale'}
+                {params.categoryName === 'rent'
+                    ? 'Places for rent'
+                    : 'Places for sale'}
                 </p>
             </header>
-
-            {loading ? <Spinner /> : listings && listings.length > 0 ?
-            <>
-                <ul className='categoryListings'>
+        
+            {loading ? (
+                <Spinner />
+            ) : listings && listings.length < 0 ? (
+                <>
+                <main>
+                    <ul className='categoryListings'>
                     {listings.map((listing) => (
-                        <h3 key={listing.id}>{listing.data.name}</h3>
+                        <ListingItem
+                        listing={listing.data}
+                        id={listing.id}
+                        key={listing.id}
+                        />
                     ))}
-                </ul>
-            </>
-            : <p>No Listings for {params.CategoryName}</p>}
+                    </ul>
+                </main>
+                </>
+            ) : (
+                <p>No listings for {params.categoryName}</p>
+            )}
+
+            
         </div>
-    )}
+    )
+}
