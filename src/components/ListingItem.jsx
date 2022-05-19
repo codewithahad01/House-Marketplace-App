@@ -10,6 +10,15 @@ function ListingItem({listings, id}) {
         <li className='categoryListings'>
             <Link to={`/category/${listings.type}/${id}`} className='categoryListingLink'>
                 <img src={listings.imgUrls} alt={listings.name} className='categoryListingImg'/>
+                <div className='categoryListingDetails'>
+                    <p className='categoryListingLocation'>
+                        {listings.location}
+                    </p>
+                    <p className='categoryListingsName'>{listings.name}</p>
+                    <p className='categoryListingsPrice'>
+                        {listings}
+                    </p>
+                </div>
             </Link>
         </li>
     )
